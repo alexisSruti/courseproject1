@@ -254,6 +254,7 @@ public class ProductDAO {
             sql = "INSERT INTO Product VALUES (3819038, 'Bread', 1.56, 1, DATE '2017-10-22', 'GreatValue')";
             stmt.executeQuery(sql);
             sql = "INSERT INTO Product VALUES (9320193, 'Oranges', 5.88, 2, DATE '2017-10-30', 'Cuties'); ";
+            stmt.executeQuery(sql);
         }
         catch (SQLException se) {
             // Handle errors for JDBC
