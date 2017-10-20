@@ -792,17 +792,17 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         double price = 0;
         int quantity = 0;
         try {
-            ID = Integer.parseInt(idEditField.getText());
+            ID = Integer.parseInt(idAddField.getText());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "ID must be an integer.");
         }
         try {
-            price = Double.parseDouble(priceEditField.getText());
+            price = Double.parseDouble(priceAddField.getText());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Price must be a number.");
         }
         try {
-            quantity = Integer.parseInt(idEditField.getText());
+            quantity = Integer.parseInt(quantityAddField.getText());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Quantity must be an integer.");
         }
@@ -818,6 +818,12 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
                     exp.setTime(format1.parse(expiration));
                 }
             ProductDAO.insertProduct(name, ID, price, quantity, vendor, exp);
+            nameAddField.setText("Name");
+            idAddField.setText("Product ID");
+            priceAddField.setText("Price");
+            quantityAddField.setText("Quantity");
+            vendorAddField.setText("Vendor");
+            expirationAddField.setText("Expiration Date");
             addProductPanel.setVisible(false);
             managePanel.setVisible(true);
         } catch (ParseException ex) {
@@ -953,7 +959,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Price must be a number.");
         }
         try {
-            quantity = Integer.parseInt(idEditField.getText());
+            quantity = Integer.parseInt(quantityEditField.getText());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Quantity must be an integer.");
         }
@@ -1001,6 +1007,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        ProductDAO.checkDatabase();
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
