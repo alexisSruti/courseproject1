@@ -42,7 +42,10 @@ public class UserDAO {
 		String name = rs.getString("UserName");
 		int id = rs.getInt("UserId");
 		boolean isManager = rs.getBoolean("isManager");
-                User c = new User(name, id, isManager);
+    String username = rs.getString("UserUsername");
+    String password = rs.getString("UserPassword");
+    String fileName = rs.getString("UserFileName");
+                User c = new User(name, id, isManager, username, password, fileName);
                 userList.add(c);
             }
         }
@@ -81,13 +84,16 @@ public class UserDAO {
             // STEP 3: Open a connection
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM StoreManagement.User WHERE UserID = " + id;
+            String sql = "SELECT * FROM StoreManagement.User WHERE UserID = " + ID;
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
 		// Retrieve by column name
 		String name = rs.getString("UserName");
-		int id = rs.getInt("Userid");
+		int id = rs.getInt("UserID");
 		boolean isManager = rs.getBoolean("isManager");
+    String username = rs.getString("UserUsername");
+    String password =rs.getString("UserPassword");
+    String fileName = rs.getString("UserFileName");
             }
         }
         catch (SQLException se) {
@@ -115,16 +121,113 @@ public class UserDAO {
 	}
         return user;
     }
-    public static void insertUser(String name, int id, boolean isManager) {
+
+    //Username
+    public static User findByUsername(String usernameIn) {
+        User user = new User();
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            // STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER);
+            // STEP 3: Open a connection
+            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM StoreManagement.User WHERE UserUsername = " + usernameIn;
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+		// Retrieve by column name
+		String name = rs.getString("UserName");
+		int id = rs.getInt("UserID");
+		boolean isManager = rs.getBoolean("isManager");
+    String username = rs.getString("UserUsername");
+    String password =rs.getString("UserPassword");
+    String fileName = rs.getString("UserFileName");
+            }
+        }
+        catch (SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+	} catch (Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
+	} finally {
+            // finally block used to close resources
+            try {
+		if (stmt != null) {
+                    stmt.close();
+		}
+            } catch (SQLException se2) {
+		// nothing we can do }
+		try {
+                    if (conn != null) {
+			conn.close();
+                    }
+                } catch (SQLException se) {
+                    se.printStackTrace();
+		} // end finally try
+            } // end try
+	}
+        return user;
+    }
+
+    public static User findByPassword(String passwordIn) {
+        User user = new User();
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            // STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER);
+            // STEP 3: Open a connection
+            conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+            stmt = conn.createStatement();
+            String sql = "SELECT * FROM StoreManagement.User WHERE UserPassword = " + passwordIn;
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+		// Retrieve by column name
+		String name = rs.getString("UserName");
+		int id = rs.getInt("UserID");
+		boolean isManager = rs.getBoolean("isManager");
+    String username = rs.getString("UserUsername");
+    String password =rs.getString("UserPassword");
+    String fileName = rs.getString("UserFileName");
+            }
+        }
+        catch (SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+	} catch (Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
+	} finally {
+            // finally block used to close resources
+            try {
+		if (stmt != null) {
+                    stmt.close();
+		}
+            } catch (SQLException se2) {
+		// nothing we can do }
+		try {
+                    if (conn != null) {
+			conn.close();
+                    }
+                } catch (SQLException se) {
+                    se.printStackTrace();
+		} // end finally try
+            } // end try
+	}
+        return user;
+    }
+    public static void insertUser(String name, int id, boolean isManager, String username, String password, String fileName) {
         Connection conn = null;
         Statement stmt = null;
         String formatted = "";
-        if (expiration == null) {
-            formatted = "null";
-        } else {
-            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-            formatted = format1.format(expiration.getTime());
-        }
+        // if (expiration == null) {
+        //     formatted = "null";
+        // } else {
+        //     SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        //     formatted = format1.format(expiration.getTime());
+        // }
         try {
             // STEP 2: Register JDBC driver
             Class.forName(JDBC_DRIVER);
@@ -133,9 +236,9 @@ public class UserDAO {
             stmt = conn.createStatement();
             String sql;
             if (formatted.equals("null")) {
-                sql = "INSERT INTO StoreManagement.User VALUES (" + id + ", '" + name + "', " + isManager + "');";
+                sql = "INSERT INTO StoreManagement.User VALUES (" + id + ", '" + name + "', " + isManager + ", '" + username + "', " + password + ", '" + fileName + "');";
             } else {
-                sql = "INSERT INTO StoreManagement.User VALUES (" + id + ", '" + name + "', " + isManager + "');";
+                sql = "INSERT INTO StoreManagement.User VALUES (" + id + ", '" + name + "', " + isManager + ", '" + username + "', " + password + ", '" + fileName + "');";
             }
             stmt.executeUpdate(sql);
         }
@@ -163,16 +266,16 @@ public class UserDAO {
             } // end try
 	}
     }
-    public static void updateUser(String name, int id, boolean isManager) {
+    public static void updateUser(String name, int id, boolean isManager, String username, String password, String fileName) {
         Connection conn = null;
         Statement stmt = null;
         String formatted = "";
-        if (expiration == null) {
-            formatted = "null";
-        } else {
-            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-            formatted = format1.format(expiration.getTime());
-        }
+        // if (expiration == null) {
+        //     formatted = "null";
+        // } else {
+        //     SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        //     formatted = format1.format(expiration.getTime());
+        // }
         try {
             // STEP 2: Register JDBC driver
             Class.forName(JDBC_DRIVER);
@@ -182,10 +285,10 @@ public class UserDAO {
             String sql = "";
             if (formatted.equals("null")) {
                 sql = "UPDATE StoreManagement.User SET UserName = '" + name + "', isManager = " + isManager
-                    + " UserID = " + id + ";";
+                    + " UserID = " + id + " UserUsername = " + username + " UserPassword " + password + " UserFileName " + fileName + ";";
             } else {
               sql = "UPDATE StoreManagement.User SET UserName = '" + name + "', isManager = " + isManager
-                  + " UserID = " + id + ";";
+                  + " UserID = " + id + " UserUsername = " + username + " UserPassword " + password + " UserFileName " + fileName + ";";
             }
             //System.out.println(sql);
             stmt.executeUpdate(sql);
@@ -253,17 +356,17 @@ public class UserDAO {
                 sql = "USE StoreManagement";
                 stmt.executeUpdate(sql);
                 sql = "CREATE TABLE User (UserID int not NULL primary key,\n" +
-                "UserName char(30) not NULL, isManager boolean not NULL);";
+                "UserName char(30) not NULL, isManager boolean not NULL, UserUsername char(30), UserPassword char(30), UserFileName char(35));";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO User VALUES(7568687, 'John Doe', true);";
+                sql = "INSERT INTO User VALUES(7568687, 'John Doe', true, johndoe321, jd325, myPicJohn.jpg);";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO User VALUES(3987652, 'Emma Smith', false);";
+                sql = "INSERT INTO User VALUES(3987652, 'Emma Smith', false, emmasmith542, e541smith, profilePicEmma.jpg);";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO User VALUES (2759314, 'Rachel Knope', false);";
+                sql = "INSERT INTO User VALUES (2759314, 'Rachel Knope', false, rachelknope940, rachel123, myDisplayPic.jpg);";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO User VALUES (3119037, 'Ben Green', true)";
+                sql = "INSERT INTO User VALUES (3119037, 'Ben Green', true, bengreen410, 12ben45, benProfilePic.jpg )";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO User VALUES (9310143, 'Lily Jones', false); ";
+                sql = "INSERT INTO User VALUES (9310143, 'Lily Jones', false, lilyJones092, 523Lily, lilyDisplayPic.jpg); ";
                 stmt.executeUpdate(sql);
             }
         }
