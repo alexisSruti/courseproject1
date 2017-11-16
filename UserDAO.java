@@ -132,8 +132,8 @@ public class UserDAO {
             // STEP 3: Open a connection
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM StoreManagement.User WHERE UserUsername = " + usernameIn
-                    + " AND UserPassword = " + passwordIn;
+            String sql = "SELECT * FROM StoreManagement.User WHERE UserUsername = '" + usernameIn
+                    + "' AND UserPassword = '" + passwordIn + "';";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
 		// Retrieve by column name
@@ -172,7 +172,8 @@ public class UserDAO {
 	}
         return user;
     }
-    public static void insertUser(String name, int id, boolean isManager, String username, String password, String fileName) {
+    public static void insertUser(String name, int id, boolean isManager, 
+            String username, String password, String fileName) {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -181,7 +182,8 @@ public class UserDAO {
             // STEP 3: Open a connection
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             stmt = conn.createStatement();
-            String sql = "INSERT INTO StoreManagement.User VALUES (" + id + ", '" + name + "', " + isManager + ", '" + username + "', " + password + ", '" + fileName + "');";
+            String sql = "INSERT INTO StoreManagement.User VALUES (" + id + ", '" + name 
+                    + "', " + isManager + ", '" + username + "', '" + password + "', '" + fileName + "');";
             stmt.executeUpdate(sql);
         }
         catch (SQLException se) {
@@ -218,7 +220,8 @@ public class UserDAO {
             conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             stmt = conn.createStatement();
             String sql = "UPDATE StoreManagement.User SET UserName = '" + name + "', isManager = " + isManager
-                + " UserID = " + id + " UserUsername = " + username + " UserPassword " + password + " UserFileName " + fileName + ";";
+                + ", UserUsername = '" + username + "', UserPassword = '" 
+                + password + "', UserFileName = '" + fileName + "' WHERE UserID = " + id + ";";
             
             //System.out.println(sql);
             stmt.executeUpdate(sql);
@@ -281,18 +284,22 @@ public class UserDAO {
                 String sql = "SELECT * FROM StoreManagement.User";
                 stmt.executeQuery(sql);
             } catch (Exception ex) {
-                String sql = "CREATE TABLE User (UserID int not NULL primary key,\n" +
+                String sql = "USE StoreManagement";
+                stmt.executeUpdate(sql);
+                sql = "CREATE TABLE User(UserID int not NULL primary key,\n" +
                 "UserName char(30) not NULL, isManager boolean not NULL, UserUsername char(30), UserPassword char(30), UserFileName char(35));";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO User VALUES(7568687, 'John Doe', true, johndoe321, jd325, myPicJohn.jpg);";
+                sql = "INSERT INTO User VALUES (1, 'admin', true, 'admin', 'pass', 'admin.jpg');";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO User VALUES(3987652, 'Emma Smith', false, emmasmith542, e541smith, profilePicEmma.jpg);";
+                sql = "INSERT INTO User VALUES(7568687, 'John Doe', true, 'johndoe321', 'jd325', 'myPicJohn.jpg');";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO User VALUES (2759314, 'Rachel Knope', false, rachelknope940, rachel123, myDisplayPic.jpg);";
+                sql = "INSERT INTO User VALUES(3987652, 'Emma Smith', false, 'emmasmith542', 'e541smith', 'profilePicEmma.jpg');";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO User VALUES (3119037, 'Ben Green', true, bengreen410, 12ben45, benProfilePic.jpg )";
+                sql = "INSERT INTO User VALUES (2759314, 'Rachel Knope', false, 'rachelknope940', 'rachel123', 'myDisplayPic.jpg');";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO User VALUES (9310143, 'Lily Jones', false, lilyJones092, 523Lily, lilyDisplayPic.jpg); ";
+                sql = "INSERT INTO User VALUES (3119037, 'Ben Green', true, 'bengreen410', '12ben45', 'benProfilePic.jpg');";
+                stmt.executeUpdate(sql);
+                sql = "INSERT INTO User VALUES (9310143, 'Lily Jones', false, 'lilyJones092', '523Lily', 'lilyDisplayPic.jpg'); ";
                 stmt.executeUpdate(sql);
             }
         }
