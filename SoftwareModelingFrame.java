@@ -1,18 +1,15 @@
 package softwaremodelingproject;
 
-import java.awt.CardLayout;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import softwaremodelingproject.Product;
 import javax.swing.*;
-import javax.swing.text.PlainDocument;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import javax.imageio.ImageIO;
 
 
 /*
@@ -26,11 +23,20 @@ import javax.swing.text.PlainDocument;
  * @author Alexis
  */
 public class SoftwareModelingFrame extends javax.swing.JFrame {
-
-    double checkoutTotal = 0;
-    ArrayList<Product> checkoutList = new ArrayList<>();
-    ArrayList<Product> productList = new ArrayList<>();
+    
     NumberFormat formatter = new DecimalFormat("#0.00");
+    Controller controller = new Controller(this);
+    public static final String NAME = "name";
+    public static final String ID = "id";
+    public static final String PRICE = "price";
+    public static final String QUANTITY = "quantity";
+    public static final String VENDOR = "vendor";
+    public static final String EXPIRATION = "expiration";
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
+    public static final String ISMANAGER = "isManager";
+    public static final String OLD_PASSWORD = "old password";
+    
     /**
      * Creates new form SoftwareModelingFram
      */
@@ -47,20 +53,61 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        loginPanel = new javax.swing.JPanel();
+        usernameField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JTextField();
+        usernameLoginLabel = new javax.swing.JLabel();
+        passwordLoginLabel = new javax.swing.JLabel();
+        bigLabel = new javax.swing.JLabel();
+        loginButton = new javax.swing.JButton();
         startPanel = new javax.swing.JPanel();
         manageButton = new javax.swing.JButton();
         checkoutButton = new javax.swing.JButton();
+        startUserLabel = new javax.swing.JLabel();
+        viewProfileButton = new javax.swing.JButton();
+        logOutButton = new javax.swing.JButton();
+        userPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        picPlaceLabel = new javax.swing.JLabel();
+        namePlaceLabel = new javax.swing.JLabel();
+        usernameUserLabel = new javax.swing.JLabel();
+        usernamePlaceLabel = new javax.swing.JLabel();
+        userCancelButton = new javax.swing.JButton();
+        changePictureButton = new javax.swing.JButton();
+        changePasswordButton = new javax.swing.JButton();
+        roleUserLabel = new javax.swing.JLabel();
+        rolePlaceLabel = new javax.swing.JLabel();
+        currentPasswordLabel = new javax.swing.JLabel();
+        currentPasswordField = new javax.swing.JTextField();
+        newPasswordLabel = new javax.swing.JLabel();
+        newPasswordField = new javax.swing.JTextField();
+        passwordSubmitButton = new javax.swing.JButton();
+        filePanel = new javax.swing.JPanel();
         checkoutPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        OrderArea = new javax.swing.JTextArea();
+        orderArea = new javax.swing.JTextArea();
         checkoutCancelButton = new javax.swing.JButton();
         checkoutLookupButton = new javax.swing.JButton();
         finishAndPayButton = new javax.swing.JButton();
         totalLabel = new javax.swing.JLabel();
+        checkoutLookupPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        checkoutLookupArea = new javax.swing.JTextArea();
+        checkoutSearchLabel = new javax.swing.JLabel();
+        checkoutSearchField = new javax.swing.JTextField();
+        checkoutIdLabel = new javax.swing.JLabel();
+        checkoutIdField = new javax.swing.JTextField();
+        checkoutLookupSubmit = new javax.swing.JButton();
+        checkoutSearchButton = new javax.swing.JButton();
+        checkoutLookupCancel = new javax.swing.JButton();
+        checkoutQuantityLabel = new javax.swing.JLabel();
+        checkoutQuantityField = new javax.swing.JTextField();
         managePanel = new javax.swing.JPanel();
         addNewButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
         manageCancelButton = new javax.swing.JButton();
+        addUserButton = new javax.swing.JButton();
+        businessReportButton = new javax.swing.JButton();
         addProductPanel = new javax.swing.JPanel();
         addProductLabel = new javax.swing.JLabel();
         nameAddLabel = new javax.swing.JLabel();
@@ -78,6 +125,16 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         addSubmitButton = new javax.swing.JButton();
         addDateFormatLabel = new javax.swing.JLabel();
         addProductCancel = new javax.swing.JButton();
+        editLookupPanel = new javax.swing.JPanel();
+        editSearchLabel = new javax.swing.JLabel();
+        editSearchField = new javax.swing.JTextField();
+        editLookupIdLabel = new javax.swing.JLabel();
+        editLookupIdField = new javax.swing.JTextField();
+        editLookupSubmit = new javax.swing.JButton();
+        editSearchButton = new javax.swing.JButton();
+        editLookupCancel = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        editLookupArea = new javax.swing.JTextArea();
         editProductPanel = new javax.swing.JPanel();
         editProductLabel = new javax.swing.JLabel();
         nameEditLabel = new javax.swing.JLabel();
@@ -95,32 +152,92 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         editSubmitButton = new javax.swing.JButton();
         editDateFormatLabel = new javax.swing.JLabel();
         editProductCancel = new javax.swing.JButton();
-        checkoutLookupPanel = new javax.swing.JPanel();
-        checkoutSearchLabel = new javax.swing.JLabel();
-        checkoutSearchField = new javax.swing.JTextField();
-        checkoutIdLabel = new javax.swing.JLabel();
-        checkoutIdField = new javax.swing.JTextField();
-        checkoutLookupSubmit = new javax.swing.JButton();
-        checkoutSearchButton = new javax.swing.JButton();
-        checkoutLookupCancel = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        checkoutLookupArea = new javax.swing.JTextArea();
-        checkoutQuantityLabel = new javax.swing.JLabel();
-        checkoutQuantityField = new javax.swing.JTextField();
-        editLookupPanel = new javax.swing.JPanel();
-        editSearchLabel = new javax.swing.JLabel();
-        editSearchField = new javax.swing.JTextField();
-        editLookupIdLabel = new javax.swing.JLabel();
-        editLookupIdField = new javax.swing.JTextField();
-        editLookupSubmit = new javax.swing.JButton();
-        editSearchButton = new javax.swing.JButton();
-        editLookupCancel = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        editLookupArea = new javax.swing.JTextArea();
+        addUserPanel = new javax.swing.JPanel();
+        newUserLabel = new javax.swing.JLabel();
+        newUserNameLabel = new javax.swing.JLabel();
+        newUserNameField = new javax.swing.JTextField();
+        newUserIsManagerLabel = new javax.swing.JLabel();
+        isManagerCheckBox = new javax.swing.JCheckBox();
+        newUserUsernameLabel = new javax.swing.JLabel();
+        newUserUsernameField = new javax.swing.JTextField();
+        newUserCancelButton = new javax.swing.JButton();
+        newUserGeneratePasswordButton = new javax.swing.JButton();
+        newUserPasswordLabel = new javax.swing.JLabel();
+        newUserSubmitButton = new javax.swing.JButton();
+        generatedPasswordLabel = new javax.swing.JLabel();
+        businessReportPanel = new javax.swing.JPanel();
+        businessReportLabel = new javax.swing.JLabel();
+        businessReportCancelButton = new javax.swing.JButton();
+        nameDescButton = new javax.swing.JButton();
+        idDescButton = new javax.swing.JButton();
+        soldDescButton = new javax.swing.JButton();
+        revenueDescButton = new javax.swing.JButton();
+        nameAscButton = new javax.swing.JButton();
+        idAscButton = new javax.swing.JButton();
+        soldAscButton = new javax.swing.JButton();
+        revenueAscButton = new javax.swing.JButton();
+        tableScrollPane = new javax.swing.JScrollPane();
+        tablePanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Frame");
         getContentPane().setLayout(new java.awt.CardLayout());
+
+        usernameLoginLabel.setText("Username:");
+
+        passwordLoginLabel.setText("Password:");
+
+        bigLabel.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        bigLabel.setText("Store Management System Login");
+
+        loginButton.setText("Log In");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
+        loginPanel.setLayout(loginPanelLayout);
+        loginPanelLayout.setHorizontalGroup(
+            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginPanelLayout.createSequentialGroup()
+                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(bigLabel))
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usernameLoginLabel)
+                            .addComponent(passwordLoginLabel)))
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                            .addComponent(usernameField)
+                            .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+        loginPanelLayout.setVerticalGroup(
+            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginPanelLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(bigLabel)
+                .addGap(36, 36, 36)
+                .addComponent(usernameLoginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(passwordLoginLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(loginButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(loginPanel, "card9");
 
         manageButton.setText("Manage");
         manageButton.addActionListener(new java.awt.event.ActionListener() {
@@ -136,34 +253,215 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
             }
         });
 
+        startUserLabel.setText("Welcome, UserHere");
+
+        viewProfileButton.setText("View Profile");
+        viewProfileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProfileButtonActionPerformed(evt);
+            }
+        });
+
+        logOutButton.setText("Log Out");
+        logOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout startPanelLayout = new javax.swing.GroupLayout(startPanel);
         startPanel.setLayout(startPanelLayout);
         startPanelLayout.setHorizontalGroup(
             startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, startPanelLayout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
-                .addComponent(checkoutButton)
-                .addGap(110, 110, 110)
-                .addComponent(manageButton)
-                .addContainerGap(88, Short.MAX_VALUE))
+            .addGroup(startPanelLayout.createSequentialGroup()
+                .addGroup(startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(startPanelLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(checkoutButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                        .addComponent(manageButton))
+                    .addGroup(startPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(startUserLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(93, 93, 93))
+            .addGroup(startPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(startPanelLayout.createSequentialGroup()
+                        .addComponent(viewProfileButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(startPanelLayout.createSequentialGroup()
+                        .addComponent(logOutButton)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         startPanelLayout.setVerticalGroup(
             startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(startPanelLayout.createSequentialGroup()
-                .addContainerGap(132, Short.MAX_VALUE)
+                .addComponent(startUserLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(viewProfileButton)
+                .addGap(82, 82, 82)
                 .addGroup(startPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(manageButton)
-                    .addComponent(checkoutButton))
-                .addContainerGap(132, Short.MAX_VALUE))
+                    .addComponent(checkoutButton)
+                    .addComponent(manageButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addComponent(logOutButton)
+                .addContainerGap())
         );
 
         getContentPane().add(startPanel, "panelOne");
 
-        OrderArea.setEditable(false);
-        OrderArea.setColumns(20);
-        OrderArea.setRows(5);
-        OrderArea.setText("Order:\n");
-        jScrollPane1.setViewportView(OrderArea);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(picPlaceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(picPlaceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+
+        namePlaceLabel.setText("Name");
+
+        usernameUserLabel.setText("Username:");
+
+        usernamePlaceLabel.setText("username here");
+
+        userCancelButton.setText("Cancel");
+        userCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userCancelButtonActionPerformed(evt);
+            }
+        });
+
+        changePictureButton.setText("Change Profile Picture");
+        changePictureButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changePictureButtonActionPerformed(evt);
+            }
+        });
+
+        changePasswordButton.setText("Change Password");
+        changePasswordButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changePasswordButtonActionPerformed(evt);
+            }
+        });
+
+        roleUserLabel.setText("Role:");
+
+        rolePlaceLabel.setText("role here");
+
+        currentPasswordLabel.setText("Enter current password:");
+
+        newPasswordLabel.setText("Enter new password:");
+
+        passwordSubmitButton.setText("Submit");
+        passwordSubmitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordSubmitButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout userPanelLayout = new javax.swing.GroupLayout(userPanel);
+        userPanel.setLayout(userPanelLayout);
+        userPanelLayout.setHorizontalGroup(
+            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(userPanelLayout.createSequentialGroup()
+                                .addComponent(usernameUserLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(usernamePlaceLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(userPanelLayout.createSequentialGroup()
+                                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(namePlaceLabel)
+                                    .addGroup(userPanelLayout.createSequentialGroup()
+                                        .addComponent(roleUserLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rolePlaceLabel)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(userPanelLayout.createSequentialGroup()
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(changePictureButton)
+                            .addComponent(userCancelButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(currentPasswordLabel)
+                            .addComponent(changePasswordButton)
+                            .addComponent(passwordSubmitButton)
+                            .addComponent(currentPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newPasswordLabel)
+                            .addComponent(newPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(138, Short.MAX_VALUE))
+        );
+        userPanelLayout.setVerticalGroup(
+            userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userPanelLayout.createSequentialGroup()
+                        .addComponent(namePlaceLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(usernameUserLabel)
+                            .addComponent(usernamePlaceLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(roleUserLabel)
+                            .addComponent(rolePlaceLabel)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(changePictureButton)
+                    .addComponent(changePasswordButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(currentPasswordLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(currentPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newPasswordLabel)
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(userCancelButton)
+                        .addContainerGap())
+                    .addGroup(userPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(passwordSubmitButton)
+                        .addContainerGap(22, Short.MAX_VALUE))))
+        );
+
+        getContentPane().add(userPanel, "card10");
+
+        javax.swing.GroupLayout filePanelLayout = new javax.swing.GroupLayout(filePanel);
+        filePanel.setLayout(filePanelLayout);
+        filePanelLayout.setHorizontalGroup(
+            filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 486, Short.MAX_VALUE)
+        );
+        filePanelLayout.setVerticalGroup(
+            filePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 306, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(filePanel, "card13");
+
+        orderArea.setEditable(false);
+        orderArea.setColumns(20);
+        orderArea.setRows(5);
+        orderArea.setText("Order:\n");
+        jScrollPane1.setViewportView(orderArea);
 
         checkoutCancelButton.setText("Cancel");
         checkoutCancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +500,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
                     .addComponent(checkoutLookupButton)
                     .addComponent(finishAndPayButton)
                     .addComponent(checkoutCancelButton))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         checkoutPanelLayout.setVerticalGroup(
             checkoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,19 +518,111 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
                         .addComponent(finishAndPayButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(checkoutCancelButton)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         getContentPane().add(checkoutPanel, "panelTwo");
 
-        addNewButton.setText("Add New");
+        checkoutLookupArea.setEditable(false);
+        checkoutLookupArea.setColumns(20);
+        checkoutLookupArea.setRows(5);
+        jScrollPane3.setViewportView(checkoutLookupArea);
+
+        checkoutSearchLabel.setText("Search");
+        checkoutSearchLabel.setEnabled(false);
+
+        checkoutSearchField.setText("Search");
+        checkoutSearchField.setEnabled(false);
+
+        checkoutIdLabel.setText("Enter ID");
+
+        checkoutIdField.setText("ID");
+
+        checkoutLookupSubmit.setText("Submit");
+        checkoutLookupSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkoutLookupSubmitActionPerformed(evt);
+            }
+        });
+
+        checkoutSearchButton.setText("Search");
+        checkoutSearchButton.setEnabled(false);
+
+        checkoutLookupCancel.setText("Cancel");
+        checkoutLookupCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkoutLookupCancelActionPerformed(evt);
+            }
+        });
+
+        checkoutQuantityLabel.setText("Quantity");
+
+        checkoutQuantityField.setText("Quantity");
+
+        javax.swing.GroupLayout checkoutLookupPanelLayout = new javax.swing.GroupLayout(checkoutLookupPanel);
+        checkoutLookupPanel.setLayout(checkoutLookupPanelLayout);
+        checkoutLookupPanelLayout.setHorizontalGroup(
+            checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(checkoutLookupPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkoutSearchField)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkoutLookupPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(checkoutSearchButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkoutLookupPanelLayout.createSequentialGroup()
+                        .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(checkoutIdField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(checkoutLookupCancel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(checkoutSearchLabel)
+                            .addComponent(checkoutIdLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkoutQuantityLabel)
+                            .addComponent(checkoutLookupSubmit)
+                            .addComponent(checkoutQuantityField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        checkoutLookupPanelLayout.setVerticalGroup(
+            checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(checkoutLookupPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(checkoutLookupPanelLayout.createSequentialGroup()
+                        .addComponent(checkoutSearchLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkoutSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(checkoutSearchButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(checkoutIdLabel)
+                            .addComponent(checkoutQuantityLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(checkoutIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(checkoutQuantityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                        .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(checkoutLookupSubmit)
+                            .addComponent(checkoutLookupCancel))))
+                .addContainerGap())
+        );
+
+        getContentPane().add(checkoutLookupPanel, "card7");
+
+        addNewButton.setText("Add Product");
         addNewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addNewButtonActionPerformed(evt);
             }
         });
 
-        updateButton.setText("Update");
+        updateButton.setText("Edit Product");
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButtonActionPerformed(evt);
@@ -246,6 +636,20 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
             }
         });
 
+        addUserButton.setText("Add User");
+        addUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserButtonActionPerformed(evt);
+            }
+        });
+
+        businessReportButton.setText("Business Report");
+        businessReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                businessReportButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout managePanelLayout = new javax.swing.GroupLayout(managePanel);
         managePanel.setLayout(managePanelLayout);
         managePanelLayout.setHorizontalGroup(
@@ -255,20 +659,28 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
                 .addComponent(manageCancelButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(managePanelLayout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
-                .addComponent(addNewButton)
-                .addGap(114, 114, 114)
-                .addComponent(updateButton)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(92, 92, 92)
+                .addGroup(managePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addNewButton)
+                    .addComponent(addUserButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(managePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(updateButton)
+                    .addComponent(businessReportButton))
+                .addGap(93, 93, 93))
         );
         managePanelLayout.setVerticalGroup(
             managePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(managePanelLayout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
+                .addContainerGap(133, Short.MAX_VALUE)
                 .addGroup(managePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addNewButton)
                     .addComponent(updateButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(managePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addUserButton)
+                    .addComponent(businessReportButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(manageCancelButton)
                 .addContainerGap())
         );
@@ -289,23 +701,6 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
 
         expirationAddLabel.setText("Expiration Date:");
         expirationAddLabel.setToolTipText("");
-
-        nameAddField.setText("Name");
-        nameAddField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameAddFieldActionPerformed(evt);
-            }
-        });
-
-        idAddField.setText("Product ID");
-
-        priceAddField.setText("Price");
-
-        quantityAddField.setText("Quantity");
-
-        vendorAddField.setText("Vendor");
-
-        expirationAddField.setText("Expiration Date");
 
         addSubmitButton.setLabel("Submit");
         addSubmitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -333,7 +728,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
                     .addGroup(addProductPanelLayout.createSequentialGroup()
                         .addComponent(nameAddLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nameAddField, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE))
+                        .addComponent(nameAddField, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
                     .addGroup(addProductPanelLayout.createSequentialGroup()
                         .addComponent(addProductLabel)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -398,7 +793,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
                     .addComponent(expirationAddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addDateFormatLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(addProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addSubmitButton)
                     .addComponent(addProductCancel))
@@ -406,6 +801,87 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         );
 
         getContentPane().add(addProductPanel, "card5");
+
+        editSearchLabel.setText("Search");
+        editSearchLabel.setEnabled(false);
+
+        editSearchField.setText("Search");
+        editSearchField.setEnabled(false);
+
+        editLookupIdLabel.setText("Enter ID");
+
+        editLookupIdField.setText("ID");
+
+        editLookupSubmit.setText("Submit");
+        editLookupSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editLookupSubmitActionPerformed(evt);
+            }
+        });
+
+        editSearchButton.setText("Search");
+        editSearchButton.setEnabled(false);
+
+        editLookupCancel.setText("Cancel");
+        editLookupCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editLookupCancelActionPerformed(evt);
+            }
+        });
+
+        editLookupArea.setEditable(false);
+        editLookupArea.setColumns(20);
+        editLookupArea.setRows(5);
+        jScrollPane4.setViewportView(editLookupArea);
+
+        javax.swing.GroupLayout editLookupPanelLayout = new javax.swing.GroupLayout(editLookupPanel);
+        editLookupPanel.setLayout(editLookupPanelLayout);
+        editLookupPanelLayout.setHorizontalGroup(
+            editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editLookupPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editSearchField)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editLookupPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(editSearchButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editLookupPanelLayout.createSequentialGroup()
+                        .addGroup(editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(editLookupIdField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(editLookupCancel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(editSearchLabel)
+                            .addComponent(editLookupIdLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(editLookupSubmit)))
+                .addContainerGap())
+        );
+        editLookupPanelLayout.setVerticalGroup(
+            editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editLookupPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(editLookupPanelLayout.createSequentialGroup()
+                        .addComponent(editSearchLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(editSearchButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editLookupIdLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editLookupIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                        .addGroup(editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(editLookupSubmit)
+                            .addComponent(editLookupCancel))))
+                .addContainerGap())
+        );
+
+        getContentPane().add(editLookupPanel, "card7");
 
         editProductLabel.setText("Edit Product");
 
@@ -423,28 +899,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         expirationEditLabel.setText("Expiration Date:");
         expirationEditLabel.setToolTipText("");
 
-        nameEditField.setText("Name");
-        nameEditField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameEditFieldActionPerformed(evt);
-            }
-        });
-
-        idEditField.setText("Product ID");
         idEditField.setEnabled(false);
-
-        priceEditField.setText("Price");
-
-        quantityEditField.setText("Quantity");
-
-        vendorEditField.setText("Vendor");
-        vendorEditField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vendorEditFieldActionPerformed(evt);
-            }
-        });
-
-        expirationEditField.setText("Expiration Date");
 
         editSubmitButton.setLabel("Submit");
         editSubmitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -472,7 +927,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
                     .addGroup(editProductPanelLayout.createSequentialGroup()
                         .addComponent(nameEditLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nameEditField, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE))
+                        .addComponent(nameEditField, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
                     .addGroup(editProductPanelLayout.createSequentialGroup()
                         .addComponent(idEditLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -537,7 +992,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
                     .addComponent(expirationEditField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editDateFormatLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(editProductPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editSubmitButton)
                     .addComponent(editProductCancel))
@@ -546,458 +1001,838 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
 
         getContentPane().add(editProductPanel, "card5");
 
-        checkoutSearchLabel.setText("Search");
-        checkoutSearchLabel.setEnabled(false);
+        newUserLabel.setText("New User");
 
-        checkoutSearchField.setText("Search");
-        checkoutSearchField.setEnabled(false);
-        checkoutSearchField.addActionListener(new java.awt.event.ActionListener() {
+        newUserNameLabel.setText("Name:");
+
+        newUserIsManagerLabel.setText("Is Manager?");
+
+        newUserUsernameLabel.setText("Username:");
+
+        newUserCancelButton.setText("Cancel");
+        newUserCancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkoutSearchFieldActionPerformed(evt);
+                newUserCancelButtonActionPerformed(evt);
             }
         });
 
-        checkoutIdLabel.setText("Enter ID");
-
-        checkoutIdField.setText("ID");
-
-        checkoutLookupSubmit.setText("Submit");
-        checkoutLookupSubmit.addActionListener(new java.awt.event.ActionListener() {
+        newUserGeneratePasswordButton.setText("Generate Password");
+        newUserGeneratePasswordButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkoutLookupSubmitActionPerformed(evt);
+                newUserGeneratePasswordButtonActionPerformed(evt);
             }
         });
 
-        checkoutSearchButton.setText("Search");
-        checkoutSearchButton.setEnabled(false);
+        newUserPasswordLabel.setText("Password: ");
 
-        checkoutLookupCancel.setText("Cancel");
-        checkoutLookupCancel.addActionListener(new java.awt.event.ActionListener() {
+        newUserSubmitButton.setText("Submit");
+        newUserSubmitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkoutLookupCancelActionPerformed(evt);
+                newUserSubmitButtonActionPerformed(evt);
             }
         });
 
-        checkoutLookupArea.setEditable(false);
-        checkoutLookupArea.setColumns(20);
-        checkoutLookupArea.setRows(5);
-        jScrollPane3.setViewportView(checkoutLookupArea);
+        generatedPasswordLabel.setToolTipText("");
 
-        checkoutQuantityLabel.setText("Quantity");
-
-        checkoutQuantityField.setText("Quantity");
-
-        javax.swing.GroupLayout checkoutLookupPanelLayout = new javax.swing.GroupLayout(checkoutLookupPanel);
-        checkoutLookupPanel.setLayout(checkoutLookupPanelLayout);
-        checkoutLookupPanelLayout.setHorizontalGroup(
-            checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(checkoutLookupPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout addUserPanelLayout = new javax.swing.GroupLayout(addUserPanel);
+        addUserPanel.setLayout(addUserPanelLayout);
+        addUserPanelLayout.setHorizontalGroup(
+            addUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addUserPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkoutSearchField)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkoutLookupPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(checkoutSearchButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkoutLookupPanelLayout.createSequentialGroup()
-                        .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(checkoutIdField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(checkoutLookupCancel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(checkoutSearchLabel)
-                            .addComponent(checkoutIdLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(checkoutQuantityLabel)
-                            .addComponent(checkoutLookupSubmit)
-                            .addComponent(checkoutQuantityField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(addUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addUserPanelLayout.createSequentialGroup()
+                        .addComponent(newUserNameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newUserNameField))
+                    .addGroup(addUserPanelLayout.createSequentialGroup()
+                        .addComponent(newUserCancelButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
+                        .addComponent(newUserSubmitButton))
+                    .addGroup(addUserPanelLayout.createSequentialGroup()
+                        .addComponent(newUserUsernameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newUserUsernameField))
+                    .addGroup(addUserPanelLayout.createSequentialGroup()
+                        .addGroup(addUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(newUserLabel)
+                            .addComponent(newUserGeneratePasswordButton)
+                            .addGroup(addUserPanelLayout.createSequentialGroup()
+                                .addComponent(newUserIsManagerLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(isManagerCheckBox))
+                            .addGroup(addUserPanelLayout.createSequentialGroup()
+                                .addComponent(newUserPasswordLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(generatedPasswordLabel)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        checkoutLookupPanelLayout.setVerticalGroup(
-            checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(checkoutLookupPanelLayout.createSequentialGroup()
+        addUserPanelLayout.setVerticalGroup(
+            addUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addUserPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
-                    .addGroup(checkoutLookupPanelLayout.createSequentialGroup()
-                        .addComponent(checkoutSearchLabel)
+                .addComponent(newUserLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(addUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(addUserPanelLayout.createSequentialGroup()
+                        .addGroup(addUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(newUserNameLabel)
+                            .addComponent(newUserNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkoutSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(checkoutSearchButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkoutIdLabel)
-                            .addComponent(checkoutQuantityLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkoutIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(checkoutQuantityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                        .addGroup(checkoutLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkoutLookupSubmit)
-                            .addComponent(checkoutLookupCancel))))
-                .addContainerGap())
-        );
-
-        getContentPane().add(checkoutLookupPanel, "card7");
-
-        editSearchLabel.setText("Search");
-        editSearchLabel.setEnabled(false);
-
-        editSearchField.setText("Search");
-        editSearchField.setEnabled(false);
-        editSearchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editSearchFieldActionPerformed(evt);
-            }
-        });
-
-        editLookupIdLabel.setText("Enter ID");
-
-        editLookupIdField.setText("ID");
-
-        editLookupSubmit.setText("Submit");
-        editLookupSubmit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editLookupSubmitActionPerformed(evt);
-            }
-        });
-
-        editSearchButton.setText("Search");
-        editSearchButton.setEnabled(false);
-
-        editLookupCancel.setText("Cancel");
-        editLookupCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editLookupCancelActionPerformed(evt);
-            }
-        });
-
-        editLookupArea.setEditable(false);
-        editLookupArea.setColumns(20);
-        editLookupArea.setRows(5);
-        jScrollPane4.setViewportView(editLookupArea);
-
-        javax.swing.GroupLayout editLookupPanelLayout = new javax.swing.GroupLayout(editLookupPanel);
-        editLookupPanel.setLayout(editLookupPanelLayout);
-        editLookupPanelLayout.setHorizontalGroup(
-            editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editLookupPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editSearchField)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editLookupPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(editSearchButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editLookupPanelLayout.createSequentialGroup()
-                        .addGroup(editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(editLookupIdField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(editLookupCancel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(editSearchLabel)
-                            .addComponent(editLookupIdLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addComponent(editLookupSubmit)))
-                .addContainerGap())
-        );
-        editLookupPanelLayout.setVerticalGroup(
-            editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editLookupPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
-                    .addGroup(editLookupPanelLayout.createSequentialGroup()
-                        .addComponent(editSearchLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(editSearchButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editLookupIdLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editLookupIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                        .addGroup(editLookupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(editLookupSubmit)
-                            .addComponent(editLookupCancel))))
+                        .addComponent(newUserIsManagerLabel))
+                    .addComponent(isManagerCheckBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(addUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newUserUsernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newUserUsernameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newUserGeneratePasswordButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(addUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newUserPasswordLabel)
+                    .addComponent(generatedPasswordLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addGroup(addUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newUserCancelButton)
+                    .addComponent(newUserSubmitButton))
                 .addContainerGap())
         );
 
-        getContentPane().add(editLookupPanel, "card7");
+        getContentPane().add(addUserPanel, "card11");
+
+        businessReportLabel.setText("Business Report");
+
+        businessReportCancelButton.setText("Cancel");
+        businessReportCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                businessReportCancelButtonActionPerformed(evt);
+            }
+        });
+
+        nameDescButton.setText("Name Desc");
+        nameDescButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameDescButtonActionPerformed(evt);
+            }
+        });
+
+        idDescButton.setText("ID Desc");
+        idDescButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idDescButtonActionPerformed(evt);
+            }
+        });
+
+        soldDescButton.setText("Sold Desc");
+        soldDescButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                soldDescButtonActionPerformed(evt);
+            }
+        });
+
+        revenueDescButton.setText("Revenue Desc");
+        revenueDescButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                revenueDescButtonActionPerformed(evt);
+            }
+        });
+
+        nameAscButton.setText("Name Asc");
+        nameAscButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameAscButtonActionPerformed(evt);
+            }
+        });
+
+        idAscButton.setText("ID Asc");
+        idAscButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idAscButtonActionPerformed(evt);
+            }
+        });
+
+        soldAscButton.setText("Sold Asc");
+        soldAscButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                soldAscButtonActionPerformed(evt);
+            }
+        });
+
+        revenueAscButton.setText("Revenue Asc");
+        revenueAscButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                revenueAscButtonActionPerformed(evt);
+            }
+        });
+
+        tableScrollPane.setPreferredSize(new java.awt.Dimension(470, 167));
+
+        tablePanel.setPreferredSize(new java.awt.Dimension(470, 160));
+
+        javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
+        tablePanel.setLayout(tablePanelLayout);
+        tablePanelLayout.setHorizontalGroup(
+            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 470, Short.MAX_VALUE)
+        );
+        tablePanelLayout.setVerticalGroup(
+            tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 163, Short.MAX_VALUE)
+        );
+
+        tableScrollPane.setViewportView(tablePanel);
+
+        javax.swing.GroupLayout businessReportPanelLayout = new javax.swing.GroupLayout(businessReportPanel);
+        businessReportPanel.setLayout(businessReportPanelLayout);
+        businessReportPanelLayout.setHorizontalGroup(
+            businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(businessReportPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(businessReportPanelLayout.createSequentialGroup()
+                        .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(businessReportLabel)
+                            .addComponent(businessReportCancelButton)
+                            .addGroup(businessReportPanelLayout.createSequentialGroup()
+                                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameDescButton)
+                                    .addComponent(nameAscButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(idDescButton)
+                                    .addComponent(idAscButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(soldAscButton)
+                                    .addComponent(soldDescButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(revenueAscButton)
+                                    .addComponent(revenueDescButton))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        businessReportPanelLayout.setVerticalGroup(
+            businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(businessReportPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(businessReportLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nameAscButton)
+                        .addComponent(idAscButton))
+                    .addComponent(revenueAscButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(soldAscButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameDescButton)
+                    .addComponent(idDescButton)
+                    .addComponent(soldDescButton)
+                    .addComponent(revenueDescButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(businessReportCancelButton)
+                .addContainerGap())
+        );
+
+        getContentPane().add(businessReportPanel, "card12");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutButtonActionPerformed
-        checkoutPanel.setVisible(true);
-        startPanel.setVisible(false);
-        productList = ProductDAO.findAll();
-        Collections.sort(productList);
+        controller.action(evt);
     }//GEN-LAST:event_checkoutButtonActionPerformed
 
-    private void nameAddFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameAddFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameAddFieldActionPerformed
-
+    public void checkoutButtonAction() {
+        checkoutPanel.setVisible(true);
+        startPanel.setVisible(false);
+    }
+    
     private void checkoutCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutCancelButtonActionPerformed
-        startPanel.setVisible(true);
-        checkoutPanel.setVisible(false);
-        OrderArea.setText("Order:\n");
-        totalLabel.setText("Total: $0.00");
-        checkoutList = new ArrayList<>();
-        productList = new ArrayList<>();
-        checkoutTotal = 0;
+        controller.action(evt);
     }//GEN-LAST:event_checkoutCancelButtonActionPerformed
 
+    public void checkoutCancelButtonAction() {
+        startPanel.setVisible(true);
+        checkoutPanel.setVisible(false);
+        orderArea.setText("Order:\n");
+        totalLabel.setText("Total: $0.00");
+    }
+    
     private void manageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageButtonActionPerformed
-        managePanel.setVisible(true);
-        startPanel.setVisible(false);
+        controller.action(evt);
     }//GEN-LAST:event_manageButtonActionPerformed
 
+    public void manageButtonAction() {
+        managePanel.setVisible(true);
+        startPanel.setVisible(false);
+    }
+    
     private void addNewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewButtonActionPerformed
-        addProductPanel.setVisible(true);
-        managePanel.setVisible(false);
+        controller.action(evt);
     }//GEN-LAST:event_addNewButtonActionPerformed
 
-    private void nameEditFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameEditFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameEditFieldActionPerformed
-
-    private void manageCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCancelButtonActionPerformed
+    public void addNewButtonAction() {
+        addProductPanel.setVisible(true);
         managePanel.setVisible(false);
-        startPanel.setVisible(true);
+    }
+    
+    private void manageCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCancelButtonActionPerformed
+        controller.action(evt);
     }//GEN-LAST:event_manageCancelButtonActionPerformed
 
+    public void manageCancelButtonAction() {
+        managePanel.setVisible(false);
+        startPanel.setVisible(true);
+    }
+    
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+    public void updateButtonAction(ArrayList<Product> list) {
         managePanel.setVisible(false);
         editLookupPanel.setVisible(true);
         editLookupArea.setText(null);
-        for (Product p : ProductDAO.findAll()) {
+        for (Product p : list) {
             editLookupArea.append(p.getName() + "\tID: " + p.getId() + "\n"
                 + "   In Stock: " + p.getQuantity() + "\t   $" + formatter.format(p.getPrice()) + "\n");
         }
-    }//GEN-LAST:event_updateButtonActionPerformed
-
-    private void checkoutSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutSearchFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkoutSearchFieldActionPerformed
-
+    }
+    
     private void addSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSubmitButtonActionPerformed
-        String name = nameAddField.getText();
-        int ID = 0;
-        double price = 0;
-        int quantity = 0;
-        try {
-            ID = Integer.parseInt(idAddField.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "ID must be an integer.");
-        }
-        try {
-            price = Double.parseDouble(priceAddField.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Price must be a number.");
-        }
-        try {
-            quantity = Integer.parseInt(quantityAddField.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Quantity must be an integer.");
-        }
-        String vendor = vendorAddField.getText();
-        String expiration = expirationAddField.getText();
-        Calendar exp;
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                if (expiration.equals("null")) {
-                    exp = null;
-                } else {
-                    exp = Calendar.getInstance();
-                    exp.setTime(format1.parse(expiration));
-                }
-            ProductDAO.insertProduct(name, ID, price, quantity, vendor, exp);
-            nameAddField.setText("Name");
-            idAddField.setText("Product ID");
-            priceAddField.setText("Price");
-            quantityAddField.setText("Quantity");
-            vendorAddField.setText("Vendor");
-            expirationAddField.setText("Expiration Date");
-            addProductPanel.setVisible(false);
-            managePanel.setVisible(true);
-        } catch (ParseException ex) {
-            Logger.getLogger(SoftwareModelingFrame.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Please enter properly formatted date.");
-        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put(NAME, nameAddField.getText());
+        map.put(ID, idAddField.getText());
+        map.put(PRICE, priceAddField.getText());
+        map.put(QUANTITY, quantityAddField.getText());
+        map.put(VENDOR, vendorAddField.getText());
+        map.put(EXPIRATION, expirationAddField.getText());
+        controller.action(evt, map);
     }//GEN-LAST:event_addSubmitButtonActionPerformed
 
-    private void vendorEditFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendorEditFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vendorEditFieldActionPerformed
-
+    public void addSubmitButtonAction() {
+        nameAddField.setText("");
+        idAddField.setText("");
+        priceAddField.setText("");
+        quantityAddField.setText("");
+        vendorAddField.setText("");
+        expirationAddField.setText("");
+        addProductPanel.setVisible(false);
+        managePanel.setVisible(true);
+    }
+    
     private void checkoutLookupCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutLookupCancelActionPerformed
-        checkoutLookupPanel.setVisible(false);
-        checkoutPanel.setVisible(true);
+        controller.action(evt);
     }//GEN-LAST:event_checkoutLookupCancelActionPerformed
 
+    public void checkoutLookupCancelAction() {
+        checkoutLookupPanel.setVisible(false);
+        checkoutPanel.setVisible(true);
+        checkoutIdField.setText("");
+        checkoutQuantityField.setText("");
+    }
+    
     private void checkoutLookupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutLookupButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_checkoutLookupButtonActionPerformed
+
+    public void checkoutLookupButtonAction(ArrayList<Product> list) {
         checkoutPanel.setVisible(false);
         checkoutLookupPanel.setVisible(true);
         checkoutLookupArea.setText(null);
-        for (Product p : productList) {
+        for (Product p : list) {
             if (p.getQuantity() > 0) {
                 checkoutLookupArea.append(p.getName() + "\tID: " + p.getId() + "\n"
                     + "   In Stock: " + p.getQuantity() + "\t   $" + formatter.format(p.getPrice()) + "\n");
             }
         }
-    }//GEN-LAST:event_checkoutLookupButtonActionPerformed
-
+    }
+    
     private void checkoutLookupSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutLookupSubmitActionPerformed
-        try {
-            int id = Integer.parseInt(checkoutIdField.getText());
-            int quantity = Integer.parseInt(checkoutQuantityField.getText());
-            Product p = new Product();
-            int low = 0;
-            int high = productList.size();
-            int i = 0;
-            while (low <= high) {
-                i = low + ((high - low) / 2);
-                if (productList.get(i).getId() == id) {
-                    p = productList.get(i);
-                    break;
-                } else if (productList.get(i).getId() < id) {
-                    low = i + 1;
-                } else {
-                    high = i - 1;
-                }
-            }
-            if (p.getName().equals("null")) {
-                JOptionPane.showMessageDialog(this, "Please enter a valid Product ID.");
-            } else if (quantity < 0) {
-                JOptionPane.showMessageDialog(this, "Please enter a valid quantity.");
-            } else if (quantity > p.getQuantity()) {
-                JOptionPane.showMessageDialog(this, "Quantity cannot exceed the amount of product in stock.");
-            } else if (quantity <= p.getQuantity()) {
-                double totalPrice = quantity * p.getPrice();
-                checkoutTotal += totalPrice;
-                OrderArea.append(p.getName() + "\tID: " + p.getId() + "\n"
-                    + "   Quantity: " + quantity + "\t   Total: $" + formatter.format(totalPrice) + "\n");
-                checkoutList.add(p);
-                totalLabel.setText("Total: $" + formatter.format(checkoutTotal));
-                productList.get(i).setQuantity(p.getQuantity() - quantity);
-                checkoutLookupPanel.setVisible(false);
-                checkoutPanel.setVisible(true);
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter properly formatted numbers.");
-        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put(ID, checkoutIdField.getText());
+        map.put(QUANTITY, checkoutQuantityField.getText());
+        controller.action(evt, map);
     }//GEN-LAST:event_checkoutLookupSubmitActionPerformed
 
-    private void editSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSearchFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editSearchFieldActionPerformed
-
+    public void checkoutLookupSubmitAction(Product p, double totalPrice, double total) {
+        orderArea.append(p.getName() + "\tID: " + p.getId() + "\n"
+            + "   Quantity: " + p.getQuantity() + "\t   Total: $" + formatter.format(totalPrice) + "\n");
+        totalLabel.setText("Total: $" + formatter.format(total));
+        checkoutLookupPanel.setVisible(false);
+        checkoutPanel.setVisible(true);
+        checkoutIdField.setText("");
+        checkoutQuantityField.setText("");
+    }
+    
     private void editLookupSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLookupSubmitActionPerformed
-        try {
-            int id = Integer.parseInt(editLookupIdField.getText());
-            Product p = ProductDAO.findById(id);
-            if (p.getName().equals("null")) {
-                JOptionPane.showMessageDialog(this, "Please enter a valid Product ID.");
-            } else if (!p.getName().equals("null")) {
-                nameEditField.setText(p.getName());
-                idEditField.setText("" + p.getId());
-                priceEditField.setText("" + formatter.format(p.getPrice()));
-                quantityEditField.setText("" + p.getQuantity());
-                vendorEditField.setText(p.getVendor());
-                Calendar expiration = p.getExpiration();
-                String formatted = "";
-                if (expiration == null) {
-                    formatted = "null";
-                } else {
-                    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-                    formatted = format1.format(expiration.getTime());
-                }
-                expirationEditField.setText(formatted);
-                editLookupPanel.setVisible(false);
-                editProductPanel.setVisible(true);
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter properly formatted numbers.");
-        }
-        
+        HashMap<String, String> map = new HashMap<>();
+        map.put(ID, editLookupIdField.getText());
+        controller.action(evt, map);
     }//GEN-LAST:event_editLookupSubmitActionPerformed
 
-    private void editLookupCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLookupCancelActionPerformed
+    public void editLookupSubmitAction(String name, int id, Double price, int quantity, 
+            String vendor, String expiration) {
+        nameEditField.setText(name);
+        idEditField.setText("" + id);
+        priceEditField.setText("" + formatter.format(price));
+        quantityEditField.setText("" + quantity);
+        vendorEditField.setText(vendor);
+        expirationEditField.setText(expiration);
+        editLookupIdField.setText("");
         editLookupPanel.setVisible(false);
-        managePanel.setVisible(true);
+        editProductPanel.setVisible(true);
+    }
+    
+    private void editLookupCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLookupCancelActionPerformed
+        controller.action(evt);
     }//GEN-LAST:event_editLookupCancelActionPerformed
 
+    public void editLookupCancelAction() {
+        editLookupPanel.setVisible(false);
+        managePanel.setVisible(true);
+        editLookupIdField.setText("");
+    }
+    
     private void editProductCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductCancelActionPerformed
-        editProductPanel.setVisible(false);
-        editLookupPanel.setVisible(true);
+        controller.action(evt);
     }//GEN-LAST:event_editProductCancelActionPerformed
 
+    public void editProductCancelAction() {
+        editProductPanel.setVisible(false);
+        editLookupPanel.setVisible(true);
+    }
+    
     private void addProductCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductCancelActionPerformed
-        addProductPanel.setVisible(false);
-        managePanel.setVisible(true);
+        controller.action(evt);
     }//GEN-LAST:event_addProductCancelActionPerformed
 
+    public void addProductCancelAction() {
+        addProductPanel.setVisible(false);
+        managePanel.setVisible(true);
+    }
+    
     private void editSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSubmitButtonActionPerformed
-        String name = nameEditField.getText();
-        int ID = 0;
-        double price = 0;
-        int quantity = 0;
-        try {
-            ID = Integer.parseInt(idEditField.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "ID must be an integer.");
-        }
-        try {
-            price = Double.parseDouble(priceEditField.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Price must be a number.");
-        }
-        try {
-            quantity = Integer.parseInt(quantityEditField.getText());
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Quantity must be an integer.");
-        }
-        String vendor = vendorEditField.getText();
-        String expiration = expirationEditField.getText();
-        Calendar exp;
-        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            if (expiration.equals("null")) {
-                exp = null;
-            } else {
-                exp = Calendar.getInstance();
-                exp.setTime(format1.parse(expiration));
-            }
-            ProductDAO.updateProduct(name, ID, price, quantity, vendor, exp);
-            editProductPanel.setVisible(false);
-            managePanel.setVisible(true);
-        } catch (ParseException ex) {
-            Logger.getLogger(SoftwareModelingFrame.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Please enter properly formatted date.");
-        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put(NAME, nameEditField.getText());
+        map.put(ID, idEditField.getText());
+        map.put(PRICE, priceEditField.getText());
+        map.put(QUANTITY, quantityEditField.getText());
+        map.put(VENDOR, vendorEditField.getText());
+        map.put(EXPIRATION, expirationEditField.getText());
+        controller.action(evt, map);
     }//GEN-LAST:event_editSubmitButtonActionPerformed
 
+    public void editSubmitButtonAction() {
+        editProductPanel.setVisible(false);
+        managePanel.setVisible(true);
+    }
+    
     private void finishAndPayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishAndPayButtonActionPerformed
-        for (Product p : productList) {
-            //is CheckoutList obsolete?
-            ProductDAO.updateProduct(p.getName(), p.getId(), p.getPrice(), p.getQuantity(), 
-                    p.getVendor(), p.getExpiration());
-        }
-        startPanel.setVisible(true);
-        checkoutPanel.setVisible(false);
-        OrderArea.setText("Order: ");
-        totalLabel.setText("Total: $0.00");
-        checkoutList = new ArrayList<>();
-        productList = new ArrayList<>();
-        checkoutTotal = 0;
+        controller.action(evt);
     }//GEN-LAST:event_finishAndPayButtonActionPerformed
 
+    public void finishAndPayButtonAction() {
+        startPanel.setVisible(true);
+        checkoutPanel.setVisible(false);
+        orderArea.setText("Order: ");
+        totalLabel.setText("Total: $0.00");
+    }
+    
+    private void viewProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProfileButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_viewProfileButtonActionPerformed
+    
+    public void viewProfileButtonAction(User user) {
+        startPanel.setVisible(false);
+        userPanel.setVisible(true);
+        currentPasswordLabel.setVisible(false);
+        currentPasswordField.setVisible(false);
+        newPasswordLabel.setVisible(false);
+        newPasswordField.setVisible(false);
+        passwordSubmitButton.setVisible(false);
+        namePlaceLabel.setText(user.getName());
+        usernamePlaceLabel.setText(user.getUsername());
+        if (user.getImage() != null) {
+            Controller.setImageLabel(picPlaceLabel, user.getImage());
+        }
+        if(user.isManager()) {
+            rolePlaceLabel.setText("Manager");
+        } else {
+            rolePlaceLabel.setText("Cashier");
+        }
+    }
+    
+    private void newUserGeneratePasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserGeneratePasswordButtonActionPerformed
+        HashMap<String, String> map = new HashMap<>();
+        map.put(USERNAME, newUserUsernameField.getText());
+        controller.action(evt, map);
+    }//GEN-LAST:event_newUserGeneratePasswordButtonActionPerformed
+
+    public void newUserGeneratePasswordButtonAction(String password) {
+        generatedPasswordLabel.setText(password);
+    }
+    
+    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_addUserButtonActionPerformed
+
+    public void addUserButtonAction() {
+        managePanel.setVisible(false);
+        addUserPanel.setVisible(true);
+    }
+    
+    private void newUserCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserCancelButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_newUserCancelButtonActionPerformed
+
+    public void newUserCancelButtonAction(){
+        addUserPanel.setVisible(false);
+        managePanel.setVisible(true);
+    }
+    
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        HashMap<String, String> map = new HashMap<>();
+        map.put(USERNAME, usernameField.getText());
+        map.put(PASSWORD, passwordField.getText());
+        controller.action(evt, map);
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    public void loginButtonAction(User user) {
+        loginPanel.setVisible(false);
+        startPanel.setVisible(true);
+        startUserLabel.setText("Welcome, " + user.getName());
+        usernameField.setText("");
+        passwordField.setText("");
+        if (!user.isManager()) {
+            manageButton.setEnabled(false);
+        }
+    }
+    
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_logOutButtonActionPerformed
+
+    public void logOutButtonAction() {
+        manageButton.setEnabled(true);
+        startPanel.setVisible(false);
+        loginPanel.setVisible(true);
+        picPlaceLabel.setIcon(null);
+    }
+    
+    private void newUserSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserSubmitButtonActionPerformed
+        HashMap<String, String> map = new HashMap<>();
+        map.put(NAME, newUserNameField.getText());
+        boolean isManager = isManagerCheckBox.isSelected();
+        if (isManager) {
+            map.put(ISMANAGER, "true");
+        } else {
+            map.put(ISMANAGER, "false");
+        }
+        map.put(USERNAME, newUserUsernameField.getText());
+        map.put(PASSWORD, generatedPasswordLabel.getText());
+        controller.action(evt, map);
+    }//GEN-LAST:event_newUserSubmitButtonActionPerformed
+
+    public void newUserSubmitButtonAction() {
+        newUserNameField.setText("");
+        isManagerCheckBox.setSelected(false);
+        newUserUsernameField.setText("");
+        generatedPasswordLabel.setText("");
+        addUserPanel.setVisible(false);
+        managePanel.setVisible(true);
+    }
+    
+    private void businessReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_businessReportButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_businessReportButtonActionPerformed
+
+    public void businessReportButtonAction() {
+        businessReportPanel.setVisible(true);
+        managePanel.setVisible(false);
+        createTable("ProductName");
+    }
+    
+    private void businessReportCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_businessReportCancelButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_businessReportCancelButtonActionPerformed
+
+    public void businessReportCancelButtonAction() {
+        managePanel.setVisible(true);
+        businessReportPanel.setVisible(false);
+    }
+    
+    private void soldDescButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soldDescButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_soldDescButtonActionPerformed
+
+    public void soldDescButtonAction() {
+        createTable("TotalSold DESC");
+    }
+    
+    private void nameAscButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameAscButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_nameAscButtonActionPerformed
+
+    public void nameAscButtonAction() {
+        createTable("ProductName");
+    }
+    
+    private void nameDescButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameDescButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_nameDescButtonActionPerformed
+
+    public void nameDescButtonAction() {
+        createTable("ProductName DESC");
+    }
+    
+    private void idAscButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idAscButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_idAscButtonActionPerformed
+
+    public void idAscButtonAction() {
+        createTable("ProductID");
+    }
+    
+    private void idDescButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idDescButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_idDescButtonActionPerformed
+
+    public void idDescButtonAction() {
+        createTable("ProductID DESC");
+    }
+    
+    private void soldAscButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soldAscButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_soldAscButtonActionPerformed
+
+    public void soldAscButtonAction() {
+        createTable("TotalSold");
+    }
+    
+    private void revenueAscButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revenueAscButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_revenueAscButtonActionPerformed
+
+    public void revenueAscButtonAction() {
+        createTable("TotalRevenue");
+    }
+    
+    private void revenueDescButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revenueDescButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_revenueDescButtonActionPerformed
+
+    public void revenueDescButtonAction() {
+        createTable("TotalRevenue DESC");
+    }
+    
+    private void passwordSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordSubmitButtonActionPerformed
+        HashMap<String, String> map = new HashMap<>();
+        map.put(PASSWORD, newPasswordField.getText());
+        map.put(OLD_PASSWORD, currentPasswordField.getText());
+        controller.action(evt, map);
+    }//GEN-LAST:event_passwordSubmitButtonActionPerformed
+
+    public void passwordSubmitButtonAction1() {
+        currentPasswordField.setText("");
+        newPasswordField.setText("");
+    }
+    public void passwordSubmitButtonAction2() {
+        currentPasswordLabel.setVisible(false);
+        currentPasswordField.setVisible(false);
+        newPasswordLabel.setVisible(false);
+        newPasswordField.setVisible(false);
+        passwordSubmitButton.setVisible(false);
+    }
+    
+    private void changePasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_changePasswordButtonActionPerformed
+
+    public void changePasswordButtonAction() {
+        currentPasswordLabel.setVisible(true);
+        currentPasswordField.setVisible(true);
+        newPasswordLabel.setVisible(true);
+        newPasswordField.setVisible(true);
+        passwordSubmitButton.setVisible(true);
+    }
+    
+    private void changePictureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePictureButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_changePictureButtonActionPerformed
+   
+    public void changePictureButtonAction() {
+        userPanel.setVisible(false);
+        filePanel.setVisible(true);
+        JFileChooser fileChooser = new JFileChooser();
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            controller.changePicture(file);
+        } else {
+            // This would handle the JFileChooser.CANCEL_OPTION if needed. Unnecessary here.
+        }
+        filePanel.setVisible(false);
+        userPanel.setVisible(true);
+    }
+    public void changePictureButtonAction1(File file) {
+        picPlaceLabel.setText("");
+        Controller.setImageLabel(picPlaceLabel, file);
+        filePanel.setVisible(false);
+        userPanel.setVisible(true);
+    }
+    
+    
+    private void userCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userCancelButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_userCancelButtonActionPerformed
+
+    public void userCancelButtonAction() {
+        userPanel.setVisible(false);
+        startPanel.setVisible(true);
+    }
+    
+    private void createTable(String sort) {
+        ArrayList<BusinessReport> reportList = Controller.createBusinessReport(sort);
+        int rows = reportList.size();
+        int columns = 4;
+        tablePanel.removeAll();
+        tablePanel.setLayout(new GridLayout(rows + 1, columns));
+        tablePanel.add(new JLabel("Name"));
+        tablePanel.add(new JLabel("Product ID"));
+        tablePanel.add(new JLabel("Total Sold"));
+        tablePanel.add(new JLabel("Total Revenue"));
+        for (BusinessReport item : reportList) {
+            tablePanel.add(new JLabel(item.getName()));
+            tablePanel.add(new JLabel("" + item.getId()));
+            tablePanel.add(new JLabel("" + item.getTotalSold()));
+            tablePanel.add(new JLabel("" + formatter.format(item.getTotalRevenue())));
+        }
+        tableScrollPane.revalidate();
+    }
+    
+    public void showDialog(String s) {
+        JOptionPane.showMessageDialog(this, s);
+    }
+    
+    public JButton getCheckoutButton() {
+        return checkoutButton;
+    }
+    public JButton getCheckoutCancelButton() {
+        return checkoutCancelButton;
+    }
+    public JButton getManageButton() {
+        return manageButton;
+    }
+    public JButton getAddNewButton() {
+        return addNewButton;
+    }
+    public JButton getManageCancelButton() {
+        return manageCancelButton;
+    }
+    public JButton getUpdateButton() {
+        return updateButton;
+    }
+    public JButton getAddSubmitButton() {
+        return addSubmitButton;
+    }
+    public JButton getCheckoutLookupCancel() {
+        return checkoutLookupCancel;
+    }
+    public JButton getCheckoutLookupButton() {
+        return checkoutLookupButton;
+    }
+    public JButton getCheckoutLookupSubmit() {
+        return checkoutLookupSubmit;
+    }
+    public JButton getEditLookupSubmit() {
+        return editLookupSubmit;
+    }
+    public JButton getEditLookupCancel() {
+        return editLookupCancel;
+    }
+    public JButton getEditProductCancel() {
+        return editProductCancel;
+    }
+    public JButton getAddProductCancel() {
+        return addProductCancel;
+    }
+    public JButton getEditSubmitButton() {
+        return editSubmitButton;
+    }
+    public JButton getFinishAndPayButton() {
+        return finishAndPayButton;
+    }
+    public JButton getViewProfileButton() {
+        return viewProfileButton;
+    }
+    public JButton getNewUserGeneratePasswordButton() {
+        return newUserGeneratePasswordButton;
+    }
+    public JButton getAddUserButton() {
+        return addUserButton;
+    }
+    public JButton getNewUserCancelButton() {
+        return newUserCancelButton;
+    }
+    public JButton getLoginButton() {
+        return loginButton;
+    }
+    public JButton getLogOutButton() {
+        return logOutButton;
+    }
+    public JButton getNewUserSubmitButton() {
+        return newUserSubmitButton;
+    }
+    public JButton getBusinessReportButton() {
+        return businessReportButton;
+    }
+    public JButton getBusinessReportCancelButton() {
+        return businessReportCancelButton;
+    }
+    public JButton getSoldDescButton() {
+        return soldDescButton;
+    }
+    public JButton getNameAscButton() {
+        return nameAscButton;
+    }
+    public JButton getNameDescButton() {
+        return nameDescButton;
+    }
+    public JButton getIdAscButton() {
+        return idAscButton;
+    }
+    public JButton getIdDescButton() {
+        return idDescButton;
+    }
+    public JButton getSoldAscButton() {
+        return soldAscButton;
+    }
+    public JButton getRevenueAscButton() {
+        return revenueAscButton;
+    }
+    public JButton getRevenueDescButton() {
+        return revenueDescButton;
+    }
+    public JButton getPasswordSubmitButton() {
+        return passwordSubmitButton;
+    }
+    public JButton getChangePasswordButton() {
+        return changePasswordButton;
+    }
+    public JButton getChangePictureButton() {
+        return changePictureButton;
+    }
+    public JButton getUserCancelButton() {
+        return userCancelButton;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -1007,7 +1842,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        ProductDAO.checkDatabase();
+        Controller.checkDatabase();
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -1015,20 +1850,18 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SoftwareModelingFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SoftwareModelingFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SoftwareModelingFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(SoftwareModelingFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new SoftwareModelingFrame().setVisible(true);
             }
@@ -1036,13 +1869,21 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea OrderArea;
     private javax.swing.JLabel addDateFormatLabel;
     private javax.swing.JButton addNewButton;
     private javax.swing.JButton addProductCancel;
     private javax.swing.JLabel addProductLabel;
     private javax.swing.JPanel addProductPanel;
     private javax.swing.JButton addSubmitButton;
+    private javax.swing.JButton addUserButton;
+    private javax.swing.JPanel addUserPanel;
+    private javax.swing.JLabel bigLabel;
+    private javax.swing.JButton businessReportButton;
+    private javax.swing.JButton businessReportCancelButton;
+    private javax.swing.JLabel businessReportLabel;
+    private javax.swing.JPanel businessReportPanel;
+    private javax.swing.JButton changePasswordButton;
+    private javax.swing.JButton changePictureButton;
     private javax.swing.JButton checkoutButton;
     private javax.swing.JButton checkoutCancelButton;
     private javax.swing.JTextField checkoutIdField;
@@ -1058,6 +1899,8 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     private javax.swing.JButton checkoutSearchButton;
     private javax.swing.JTextField checkoutSearchField;
     private javax.swing.JLabel checkoutSearchLabel;
+    private javax.swing.JTextField currentPasswordField;
+    private javax.swing.JLabel currentPasswordLabel;
     private javax.swing.JLabel editDateFormatLabel;
     private javax.swing.JTextArea editLookupArea;
     private javax.swing.JButton editLookupCancel;
@@ -1076,21 +1919,50 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     private javax.swing.JLabel expirationAddLabel;
     private javax.swing.JTextField expirationEditField;
     private javax.swing.JLabel expirationEditLabel;
+    private javax.swing.JPanel filePanel;
     private javax.swing.JButton finishAndPayButton;
+    private javax.swing.JLabel generatedPasswordLabel;
     private javax.swing.JTextField idAddField;
     private javax.swing.JLabel idAddLabel;
+    private javax.swing.JButton idAscButton;
+    private javax.swing.JButton idDescButton;
     private javax.swing.JTextField idEditField;
     private javax.swing.JLabel idEditLabel;
+    private javax.swing.JCheckBox isManagerCheckBox;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton logOutButton;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JPanel loginPanel;
     private javax.swing.JButton manageButton;
     private javax.swing.JButton manageCancelButton;
     private javax.swing.JPanel managePanel;
     private javax.swing.JTextField nameAddField;
     private javax.swing.JLabel nameAddLabel;
+    private javax.swing.JButton nameAscButton;
+    private javax.swing.JButton nameDescButton;
     private javax.swing.JTextField nameEditField;
     private javax.swing.JLabel nameEditLabel;
+    private javax.swing.JLabel namePlaceLabel;
+    private javax.swing.JTextField newPasswordField;
+    private javax.swing.JLabel newPasswordLabel;
+    private javax.swing.JButton newUserCancelButton;
+    private javax.swing.JButton newUserGeneratePasswordButton;
+    private javax.swing.JLabel newUserIsManagerLabel;
+    private javax.swing.JLabel newUserLabel;
+    private javax.swing.JTextField newUserNameField;
+    private javax.swing.JLabel newUserNameLabel;
+    private javax.swing.JLabel newUserPasswordLabel;
+    private javax.swing.JButton newUserSubmitButton;
+    private javax.swing.JTextField newUserUsernameField;
+    private javax.swing.JLabel newUserUsernameLabel;
+    private javax.swing.JTextArea orderArea;
+    private javax.swing.JTextField passwordField;
+    private javax.swing.JLabel passwordLoginLabel;
+    private javax.swing.JButton passwordSubmitButton;
+    private javax.swing.JLabel picPlaceLabel;
     private javax.swing.JTextField priceAddField;
     private javax.swing.JLabel priceAddLabel;
     private javax.swing.JTextField priceEditField;
@@ -1099,12 +1971,28 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     private javax.swing.JLabel quantityAddLabel;
     private javax.swing.JTextField quantityEditField;
     private javax.swing.JLabel quantityEditLabel;
+    private javax.swing.JButton revenueAscButton;
+    private javax.swing.JButton revenueDescButton;
+    private javax.swing.JLabel rolePlaceLabel;
+    private javax.swing.JLabel roleUserLabel;
+    private javax.swing.JButton soldAscButton;
+    private javax.swing.JButton soldDescButton;
     private javax.swing.JPanel startPanel;
+    private javax.swing.JLabel startUserLabel;
+    private javax.swing.JPanel tablePanel;
+    private javax.swing.JScrollPane tableScrollPane;
     private javax.swing.JLabel totalLabel;
     private javax.swing.JButton updateButton;
+    private javax.swing.JButton userCancelButton;
+    private javax.swing.JPanel userPanel;
+    private javax.swing.JTextField usernameField;
+    private javax.swing.JLabel usernameLoginLabel;
+    private javax.swing.JLabel usernamePlaceLabel;
+    private javax.swing.JLabel usernameUserLabel;
     private javax.swing.JTextField vendorAddField;
     private javax.swing.JLabel vendorAddLabel;
     private javax.swing.JTextField vendorEditField;
     private javax.swing.JLabel vendorEditLabel;
+    private javax.swing.JButton viewProfileButton;
     // End of variables declaration//GEN-END:variables
 }

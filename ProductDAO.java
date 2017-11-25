@@ -1,6 +1,5 @@
 package softwaremodelingproject;
 
-import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,18 +14,19 @@ import java.util.Properties;
  */
 public class ProductDAO {
     //Properties file
-    static final Properties properties = loadProperties();
+    static final Properties PROPERTIES = loadProperties();
     
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = properties.getProperty("DB_URL");
+    static final String DB_URL = PROPERTIES.getProperty("DB_URL");
 
     // Database credentials
-    static final String USER = properties.getProperty("USERNAME");
-    static final String PASSWORD = properties.getProperty("PASSWORD");
+    static final String USER = PROPERTIES.getProperty("USERNAME");
+    static final String PASSWORD = PROPERTIES.getProperty("PASSWORD");
 
+    @SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch"})
     public static ArrayList<Product> findAll() {
-        ArrayList<Product> productList = new ArrayList<Product>();
+        ArrayList<Product> productList = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -337,9 +337,9 @@ public class ProductDAO {
                 stmt.executeUpdate(sql);
                 sql = "INSERT INTO Product VALUES (2719364, 'Paper Plate', 2.10, 1, NULL, 'GreatValue');";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO Product VALUES (3819038, 'Bread', 1.56, 1, DATE '2017-10-22', 'GreatValue')";
+                sql = "INSERT INTO Product VALUES (3819038, 'Bread', 1.56, 1, DATE '2017-10-22', 'GreatValue');";
                 stmt.executeUpdate(sql);
-                sql = "INSERT INTO Product VALUES (9320193, 'Oranges', 5.88, 2, DATE '2017-10-30', 'Cuties'); ";
+                sql = "INSERT INTO Product VALUES (9320193, 'Oranges', 5.88, 2, DATE '2017-10-30', 'Cuties');";
                 stmt.executeUpdate(sql);
             }
         }
