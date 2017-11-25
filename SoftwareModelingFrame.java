@@ -1712,7 +1712,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
             tablePanel.add(new JLabel(item.getName()));
             tablePanel.add(new JLabel("" + item.getId()));
             tablePanel.add(new JLabel("" + item.getTotalSold()));
-            tablePanel.add(new JLabel("" + formatter.format(item.getTotalRevenue())));
+            tablePanel.add(new JLabel("$" + formatter.format(item.getTotalRevenue())));
         }
         tableScrollPane.revalidate();
     }
