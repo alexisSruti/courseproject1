@@ -15,7 +15,7 @@ public class RuntimeData {
     double checkoutTotal = 0;
     private ArrayList<Product> productList = new ArrayList<>();
     private ArrayList<Product> checkoutList = new ArrayList<>();
-    User user = new User();
+    UserProxy user = new UserProxy();
     
     public void setProductList(ArrayList<Product> list) {
         productList = list;
@@ -41,10 +41,10 @@ public class RuntimeData {
     public void addToCheckoutTotal(double added) {
         checkoutTotal += added;
     }
-    public User getUser() {
+    public UserProxy getUser() {
         return user;
     }
-    public void setUser(User userIn) {
+    public void setUser(UserProxy userIn) {
         user = userIn;
     }
 }
