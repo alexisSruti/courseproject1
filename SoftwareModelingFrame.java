@@ -5,11 +5,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
-import javax.imageio.ImageIO;
 
 
 /*
@@ -102,6 +99,11 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         checkoutLookupCancel = new javax.swing.JButton();
         checkoutQuantityLabel = new javax.swing.JLabel();
         checkoutQuantityField = new javax.swing.JTextField();
+        receiptPanel = new javax.swing.JPanel();
+        textReceiptButton = new javax.swing.JButton();
+        htmlReceiptButton = new javax.swing.JButton();
+        noReceiptButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         managePanel = new javax.swing.JPanel();
         addNewButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
@@ -371,24 +373,20 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
             userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userPanelLayout.createSequentialGroup()
+                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(userPanelLayout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(userPanelLayout.createSequentialGroup()
                                 .addComponent(usernameUserLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(usernamePlaceLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(usernamePlaceLabel))
+                            .addComponent(namePlaceLabel)
                             .addGroup(userPanelLayout.createSequentialGroup()
-                                .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(namePlaceLabel)
-                                    .addGroup(userPanelLayout.createSequentialGroup()
-                                        .addComponent(roleUserLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rolePlaceLabel)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(roleUserLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rolePlaceLabel))))
                     .addGroup(userPanelLayout.createSequentialGroup()
                         .addGroup(userPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(changePictureButton)
@@ -614,6 +612,65 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         );
 
         getContentPane().add(checkoutLookupPanel, "card7");
+
+        textReceiptButton.setText("Text");
+        textReceiptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textReceiptButtonActionPerformed(evt);
+            }
+        });
+
+        htmlReceiptButton.setText("HTML");
+        htmlReceiptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                htmlReceiptButtonActionPerformed(evt);
+            }
+        });
+
+        noReceiptButton.setText("No Receipt");
+        noReceiptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noReceiptButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel1.setText("Would you like a Receipt?");
+
+        javax.swing.GroupLayout receiptPanelLayout = new javax.swing.GroupLayout(receiptPanel);
+        receiptPanel.setLayout(receiptPanelLayout);
+        receiptPanelLayout.setHorizontalGroup(
+            receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(receiptPanelLayout.createSequentialGroup()
+                .addGroup(receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(receiptPanelLayout.createSequentialGroup()
+                        .addGap(134, 134, 134)
+                        .addGroup(receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(receiptPanelLayout.createSequentialGroup()
+                                .addComponent(textReceiptButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(htmlReceiptButton))
+                            .addComponent(jLabel1)))
+                    .addGroup(receiptPanelLayout.createSequentialGroup()
+                        .addGap(186, 186, 186)
+                        .addComponent(noReceiptButton)))
+                .addGap(132, 132, 132))
+        );
+        receiptPanelLayout.setVerticalGroup(
+            receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, receiptPanelLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel1)
+                .addGap(61, 61, 61)
+                .addGroup(receiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textReceiptButton)
+                    .addComponent(htmlReceiptButton))
+                .addGap(18, 18, 18)
+                .addComponent(noReceiptButton)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(receiptPanel, "card14");
 
         addNewButton.setText("Add Product");
         addNewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1439,7 +1496,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_finishAndPayButtonActionPerformed
 
     public void finishAndPayButtonAction() {
-        startPanel.setVisible(true);
+        receiptPanel.setVisible(true);
         checkoutPanel.setVisible(false);
         orderArea.setText("Order: ");
         totalLabel.setText("Total: $0.00");
@@ -1449,7 +1506,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         controller.action(evt);
     }//GEN-LAST:event_viewProfileButtonActionPerformed
     
-    public void viewProfileButtonAction(User user) {
+    public void viewProfileButtonAction(UserProxy user) {
         startPanel.setVisible(false);
         userPanel.setVisible(true);
         currentPasswordLabel.setVisible(false);
@@ -1459,8 +1516,8 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         passwordSubmitButton.setVisible(false);
         namePlaceLabel.setText(user.getName());
         usernamePlaceLabel.setText(user.getUsername());
-        if (user.getImage() != null) {
-            Controller.setImageLabel(picPlaceLabel, user.getImage());
+        if (user.getImageFile() != null) {
+            picPlaceLabel.setIcon(new ImageIcon(user.getImage()));
         }
         if(user.isManager()) {
             rolePlaceLabel.setText("Manager");
@@ -1504,7 +1561,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         controller.action(evt, map);
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    public void loginButtonAction(User user) {
+    public void loginButtonAction(UserProxy user) {
         loginPanel.setVisible(false);
         startPanel.setVisible(true);
         startUserLabel.setText("Welcome, " + user.getName());
@@ -1698,8 +1755,25 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
         startPanel.setVisible(true);
     }
     
+    private void textReceiptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textReceiptButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_textReceiptButtonActionPerformed
+
+    private void htmlReceiptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_htmlReceiptButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_htmlReceiptButtonActionPerformed
+
+    private void noReceiptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noReceiptButtonActionPerformed
+        controller.action(evt);
+    }//GEN-LAST:event_noReceiptButtonActionPerformed
+
+    public void receiptButtonAction() {
+        receiptPanel.setVisible(false);
+        startPanel.setVisible(true);
+    }
+    
     private void createTable(String sort) {
-        ArrayList<BusinessReport> reportList = Controller.createBusinessReport(sort);
+        ArrayList<BusinessReport> reportList = controller.createBusinessReport(sort);
         int rows = reportList.size();
         int columns = 4;
         tablePanel.removeAll();
@@ -1832,6 +1906,15 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     public JButton getUserCancelButton() {
         return userCancelButton;
     }
+    public JButton getTextReceiptButton() {
+        return textReceiptButton;
+    }
+    public JButton getHTMLReceiptButton() {
+        return htmlReceiptButton;
+    }
+    public JButton getNoReceiptButton() {
+        return noReceiptButton;
+    }
     
     /**
      * @param args the command line arguments
@@ -1922,6 +2005,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     private javax.swing.JPanel filePanel;
     private javax.swing.JButton finishAndPayButton;
     private javax.swing.JLabel generatedPasswordLabel;
+    private javax.swing.JButton htmlReceiptButton;
     private javax.swing.JTextField idAddField;
     private javax.swing.JLabel idAddLabel;
     private javax.swing.JButton idAscButton;
@@ -1929,6 +2013,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     private javax.swing.JTextField idEditField;
     private javax.swing.JLabel idEditLabel;
     private javax.swing.JCheckBox isManagerCheckBox;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1958,6 +2043,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     private javax.swing.JButton newUserSubmitButton;
     private javax.swing.JTextField newUserUsernameField;
     private javax.swing.JLabel newUserUsernameLabel;
+    private javax.swing.JButton noReceiptButton;
     private javax.swing.JTextArea orderArea;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel passwordLoginLabel;
@@ -1971,6 +2057,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     private javax.swing.JLabel quantityAddLabel;
     private javax.swing.JTextField quantityEditField;
     private javax.swing.JLabel quantityEditLabel;
+    private javax.swing.JPanel receiptPanel;
     private javax.swing.JButton revenueAscButton;
     private javax.swing.JButton revenueDescButton;
     private javax.swing.JLabel rolePlaceLabel;
@@ -1981,6 +2068,7 @@ public class SoftwareModelingFrame extends javax.swing.JFrame {
     private javax.swing.JLabel startUserLabel;
     private javax.swing.JPanel tablePanel;
     private javax.swing.JScrollPane tableScrollPane;
+    private javax.swing.JButton textReceiptButton;
     private javax.swing.JLabel totalLabel;
     private javax.swing.JButton updateButton;
     private javax.swing.JButton userCancelButton;

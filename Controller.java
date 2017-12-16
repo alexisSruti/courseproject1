@@ -8,7 +8,10 @@ package softwaremodelingproject;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +19,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -28,6 +33,7 @@ public class Controller {
     
     SoftwareModelingFrame frame;
     RuntimeData data = new RuntimeData();
+    RemoteDataAdapter adapter = new RemoteDataAdapter();
     
     public Controller(SoftwareModelingFrame frameIn) {
         frame = frameIn;
@@ -35,7 +41,7 @@ public class Controller {
     
     public void action(ActionEvent e) {
         if (e.getSource() == frame.getCheckoutButton()) {
-            data.setProductList(ProductDAO.findAll());
+            data.setProductList(adapter.productFindAll());
             Collections.sort(data.getProductList());
             frame.checkoutButtonAction();
         } else if (e.getSource() == frame.getCheckoutCancelButton()) {
@@ -50,7 +56,7 @@ public class Controller {
         } else if (e.getSource() == frame.getManageCancelButton()) {
             frame.manageCancelButtonAction();
         } else if (e.getSource() == frame.getUpdateButton()) {
-            frame.updateButtonAction(ProductDAO.findAll());
+            frame.updateButtonAction(adapter.productFindAll());
         } else if (e.getSource() == frame.getCheckoutLookupCancel()) {
             frame.checkoutLookupCancelAction();
         } else if (e.getSource() == frame.getCheckoutLookupButton()) {
@@ -64,22 +70,7 @@ public class Controller {
         } else if (e.getSource() == frame.getFinishAndPayButton()) {
             ArrayList<Product> productList = data.getProductList();
             ArrayList<Product> checkoutList = data.getCheckoutList();
-            for (Product p : productList) {
-                ProductDAO.updateProduct(p.getName(), p.getId(), p.getPrice(), p.getQuantity(), 
-                        p.getVendor(), p.getExpiration());
-            }
-            int orderID = TotalOrderDAO.findOrderNumber() + 1;
-            double total = 0;
-            for (Product p : checkoutList) {
-                OrderLineDAO.insertOrderLine(orderID, p.getId(), p.getQuantity(), p.getPrice() * p.getQuantity());
-            }
-            Date date = new Date();
-            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-            String formatted = format1.format(date);
-            TotalOrderDAO.insertTotalOrder(orderID, data.getCheckoutTotal(), formatted);
-            data.setProductList(new ArrayList<>());
-            data.setCheckoutList(new ArrayList<>());
-            data.setCheckoutTotal(0);
+            adapter.doCheckout(productList, checkoutList, data.getCheckoutTotal());
             frame.finishAndPayButtonAction();
         } else if (e.getSource() == frame.getViewProfileButton()) {
             frame.viewProfileButtonAction(data.getUser());
@@ -88,7 +79,8 @@ public class Controller {
         } else if (e.getSource() == frame.getNewUserCancelButton()) {
             frame.newUserCancelButtonAction();
         } else if (e.getSource() == frame.getLogOutButton()) {
-            data.setUser(new User());
+            UserProxy user = new UserProxy(new User());
+            data.setUser(user);
             frame.logOutButtonAction();
         } else if (e.getSource() == frame.getBusinessReportButton()) {
             frame.businessReportButtonAction();
@@ -116,6 +108,62 @@ public class Controller {
             frame.changePictureButtonAction();
         } else if (e.getSource() == frame.getUserCancelButton()) {
             frame.userCancelButtonAction();
+        } else if (e.getSource() == frame.getTextReceiptButton()) {
+            int orderId = adapter.getOrderId();
+            TextReceiptBuilder builder = new TextReceiptBuilder();
+            Date date = new Date();
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+            String formatted = format1.format(date);
+            builder.setHeader(orderId, data.getUser().getName(), formatted);
+            for (Product p : data.getCheckoutList()) {
+                builder.addLine(p.getId(), p.getName(), p.getQuantity(), p.getPrice());
+            }
+            builder.setFooter(data.getCheckoutTotal());
+            PrintWriter writer;
+            String filename = "receipt" + orderId + ".txt";
+            try {
+                writer = new PrintWriter(filename, "UTF-8");
+                writer.println(builder.toString());
+                writer.close();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (UnsupportedEncodingException ex) {
+                ex.printStackTrace();
+            }
+            data.setProductList(new ArrayList<>());
+            data.setCheckoutList(new ArrayList<>());
+            data.setCheckoutTotal(0);
+            frame.showDialog("Receipt created in " + filename + "!");
+            frame.receiptButtonAction();
+        } else if (e.getSource() == frame.getHTMLReceiptButton()) {
+            int orderId = adapter.getOrderId();
+            HTMLReceiptBuilder builder = new HTMLReceiptBuilder();
+            Date date = new Date();
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+            String formatted = format1.format(date);
+            builder.setHeader(orderId, data.getUser().getName(), formatted);
+            for (Product p : data.getCheckoutList()) {
+                builder.addLine(p.getId(), p.getName(), p.getQuantity(), p.getPrice());
+            }
+            builder.setFooter(data.getCheckoutTotal());
+            PrintWriter writer;
+            String filename = "receipt" + orderId + ".htm";
+            try {
+                writer = new PrintWriter(filename, "UTF-8");
+                writer.println(builder.toString());
+                writer.close();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (UnsupportedEncodingException ex) {
+                ex.printStackTrace();
+            }
+            data.setProductList(new ArrayList<>());
+            data.setCheckoutList(new ArrayList<>());
+            data.setCheckoutTotal(0);
+            frame.showDialog("Receipt " + filename + " created!");
+            frame.receiptButtonAction();
+        } else if (e.getSource() == frame.getNoReceiptButton()) {
+            frame.receiptButtonAction();
         }
     }
     
@@ -163,7 +211,8 @@ public class Controller {
                     exp.setTime(format1.parse(expiration));
                 }
                 if (success) {
-                    ProductDAO.insertProduct(name, ID, price, quantity, vendor, exp);
+                    Product p = new Product(name, ID, price, quantity, vendor, exp);
+                    adapter.insertProduct(p);
                     frame.addSubmitButtonAction();
                 }
             } catch (ParseException ex) {
@@ -210,7 +259,7 @@ public class Controller {
         } else if (e.getSource() == frame.getEditLookupSubmit()) {
             try {
                 int id = Integer.parseInt(map.get(frame.ID));
-                Product p = ProductDAO.findById(id);
+                Product p = adapter.productFindById(id);
                 if (p.getName().equals("null")) {
                     frame.showDialog("Please enter a valid Product ID.");
                 } else if (!p.getName().equals("null")) {
@@ -271,7 +320,8 @@ public class Controller {
                     exp.setTime(format1.parse(expiration));
                 }
                 if (success) {
-                    ProductDAO.updateProduct(name, ID, price, quantity, vendor, exp);
+                    Product p = new Product(name, ID, price, quantity, vendor, exp);
+                    adapter.updateProduct(p);
                     frame.editSubmitButtonAction();
                 }
             } catch (ParseException ex) {
@@ -291,8 +341,8 @@ public class Controller {
         } else if (e.getSource() == frame.getLoginButton()) {
             String username = map.get(frame.USERNAME);
             String password = map.get(frame.PASSWORD);
-            data.setUser(UserDAO.findByUsernameAndPassword(username, password));
-            User user = data.getUser();
+            data.setUser(new UserProxy(adapter.userFindByUsernameAndPassword(username, password)));
+            UserProxy user = data.getUser();
             if(user.getName().equals("null") && user.getId() == 0) {
                 frame.showDialog("Incorrect username or password.");
             } else {
@@ -301,14 +351,14 @@ public class Controller {
         } else if (e.getSource() == frame.getNewUserSubmitButton()) {
             String name = map.get(frame.NAME);
             int id = 0;
-            id = UserDAO.findUserNumber() + 1;
+            id = adapter.findUserNumber() + 1;
             boolean isManager = false;
             if (map.get(frame.ISMANAGER).equals("true")) {
                 isManager = true;
             }
             String username = map.get(frame.USERNAME);
             String password = map.get(frame.PASSWORD);
-            int countOfUsernames = UserDAO.countUsername(username);
+            int countOfUsernames = adapter.userCountUsername(username);
             if (name.equals("") || username.equals("") || password.equals("") || countOfUsernames > 0) {
                 if (password.equals("")) {
                     frame.showDialog("Please generate a default password.");
@@ -319,16 +369,16 @@ public class Controller {
                     frame.showDialog("You must select a unique username.");
                 }
             } else {
-                UserDAO.insertUser(name, id, isManager, username, password);
+                User user = new User(name, id, isManager, username, password, null);
+                adapter.insertUser(user);
                 frame.newUserSubmitButtonAction();
             }
         } else if (e.getSource() == frame.getPasswordSubmitButton()) {
             String password = map.get(frame.PASSWORD);
-            User user = data.getUser();
+            UserProxy user = data.getUser();
             if(map.get(frame.OLD_PASSWORD).equals(user.getPassword())) {
-                UserDAO.updateUser(user.getName(), user.getId(), user.isManager(),
-                    user.getUsername(), password, user.getImage());
                 user.setPassword(password);
+                adapter.updateUser(user);
                 frame.passwordSubmitButtonAction1();
                 frame.showDialog("Password updated successfully!");
             } else {
@@ -347,8 +397,8 @@ public class Controller {
                 e.printStackTrace();
         }
     }
-    public static ArrayList<BusinessReport> createBusinessReport(String sort) {
-        return OrderLineDAO.getBusinessReportBy(sort);
+    public ArrayList<BusinessReport> createBusinessReport(String sort) {
+        return adapter.getBusinessReportBy(sort);
     }
     
     public void changePicture(File file) {
@@ -356,18 +406,14 @@ public class Controller {
         if (!filename.endsWith(".png") && !filename.endsWith(".jpeg") && !filename.endsWith(".jpg")){
             frame.showDialog("Please select a jpeg or png file.");
         } else {
-            User user = data.getUser();
-            UserDAO.updateUser(user.getName(), user.getId(), user.isManager(), 
-                    user.getUsername(), user.getPassword(), file);
+            UserProxy user = data.getUser();
             user.setImage(file);
+            adapter.updateUser(user);
             frame.changePictureButtonAction1(file);
         }
     }
     public static void checkDatabase() {
-        ProductDAO.checkDatabase();
-        UserDAO.checkDatabase();
-        TotalOrderDAO.checkDatabase();
-        OrderLineDAO.checkDatabase();
+        RemoteDataAdapter.checkDatabase();
     }
     
 }
